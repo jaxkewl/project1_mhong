@@ -2,8 +2,9 @@
 #include "Player.h"
 
 //default constructor
-Player::Player()
+Player::Player() :cointCount(175)
 {
+	
 }
 
 //default destructor
