@@ -7,6 +7,7 @@ bool Game::isFULL_HOUSE()
 	return isTHREE_OF_A_KIND() && isTWO_PAIR();
 }
 
+//calculate all the suits, if any add up to 5, then we know all suits are the same
 bool Game::isFLUSH()
 {
 	bool allSameSuit = false;
@@ -25,6 +26,7 @@ bool Game::isFLUSH()
 	return matchSuit;
 }
 
+//find the lowest card and then determine if there is a sequential increment
 bool Game::isSTRAIGHT()
 {
 	//find the lowest card
@@ -56,6 +58,7 @@ bool Game::isSTRAIGHT()
 	return foundNext;
 }
 
+//itemize each card and see if any count equals exactly 3
 bool Game::isTHREE_OF_A_KIND()
 {
 	//Three cards of the same rank and two cards of two other ranks that is 
@@ -87,6 +90,7 @@ bool Game::isTHREE_OF_A_KIND()
 	return matchVal;
 }
 
+//itemize each card and check if there are two sets with a count of two
 bool Game::isTWO_PAIR()
 {
 	int aces = 0, twos = 0, threes = 0, fours = 0, fives = 0, sixes = 0, sevens = 0, eights = 0,
@@ -127,6 +131,7 @@ bool Game::isTWO_PAIR()
 	return pairCount == 2;
 }
 
+//determine if there are cards better than jack with exactly a count of 2.
 bool Game::isJACKS_OR_BETTER()
 {
 	//Exactly one pair of Jacks, Queens, Kings, 
@@ -160,6 +165,7 @@ Game::~Game()
 
 }
 
+//pop the first 5 cards from the deck and save the cards into the player
 list<Card> Game::deal()
 {
 	//remove the first 5 cards from the deck.
@@ -173,6 +179,7 @@ list<Card> Game::deal()
 
 }
 
+//increase the player bet and also decrement the player balance
 void Game::insertCoin()
 {
 	++playerBet;
@@ -180,11 +187,13 @@ void Game::insertCoin()
 	player.setCointCount(--currentPlayerCoinCount);
 }
 
+//zero out the player's bet
 void Game::clearPlayerBet()
 {
 	playerBet = 0;
 }
 
+//get a single card from the card deck
 Card Game::getCard()
 {
 	Card c(cardDeck.getCard());
@@ -193,7 +202,7 @@ Card Game::getCard()
 }
 
 
-
+//check in this order for the best hand.
 Game::CARD_HANDS Game::findBestHand()
 {
 	//brute force way to determine the player's best hand
@@ -209,18 +218,20 @@ Game::CARD_HANDS Game::findBestHand()
 	return NONE;
 }
 
+//find the multiplier given the best hand
 int Game::getWinMultiplier()
 {
 	Game::CARD_HANDS bestHand = findBestHand();
 	return winMultiplier[bestHand];
 }
 
-
+//wrapper function
 void Game::shuffle()
 {
-
+	cardDeck.shuffle();
 }
 
+//this is the best hand ad checked first
 bool Game::isROYAL_FLUSH()
 {
 	//Royal Flush: 10, Jack, King, Queen, Ace, all of the same suit. 
@@ -249,6 +260,7 @@ bool Game::isSTRAIGHT_FLUSH()
 	return isSTRAIGHT() && isFLUSH();
 }
 
+//itemize each card and check if we see it 4 times
 bool Game::isFOUR_OF_A_KIND()
 {
 	// For cards of the same rank. For example, 3 of hearts, 3 of diamonds, 

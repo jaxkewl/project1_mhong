@@ -147,7 +147,6 @@
   <ItemGroup>
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardDeck.h" />
-    <ClInclude Include="Coin.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDisplay.h" />
     <ClInclude Include="Player.h" />
@@ -157,7 +156,6 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardDeck.cpp" />
-    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameDisplay.cpp" />
     <ClCompile Include="Player.cpp" />

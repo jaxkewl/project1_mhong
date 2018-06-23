@@ -8,7 +8,7 @@ class Player
 {
 
 public:
-	static const int INITIAL_COINT_COUNT = 10;
+	static const int INITIAL_COINT_COUNT = 175;
 
 	int getCointCount() const
 	{
@@ -33,7 +33,6 @@ private:
 public:
 	Player();
 	~Player();
-	void displayPlayerInfo();
 	void addCard(const Card & card);
 	void swapCards(const Card card, int position);
 };

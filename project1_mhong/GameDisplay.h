@@ -12,7 +12,7 @@ class GameDisplay
 {
 private:
 
-	void insertCoin();
+	bool insertCoin();
 	void promptPlayerAction();
 	void endGame();
 	void displayCards();

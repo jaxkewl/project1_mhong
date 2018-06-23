@@ -1,29 +1,23 @@
 #include "stdafx.h"
 #include "Player.h"
 
-
+//default constructor
 Player::Player()
 {
 }
 
-
+//default destructor
 Player::~Player()
 {
 }
 
-
-
-void Player::displayPlayerInfo()
-{
-	cout << "Coin Balance: " << getCointCount() << endl;
-
-}
-
+//add a card to the players current cards
 void Player::addCard(const Card & card)
 {
 	cards.push_back(card);
 }
 
+//swap out the card located at the position with the card
 void Player::swapCards(const Card card, int position)
 {
 	list<Card> newCards;

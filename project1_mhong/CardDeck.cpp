@@ -34,11 +34,15 @@ list<Card> CardDeck::getCards()
 	return cards;
 }
 
+//use a wrapper vector so we can call the vector's shuffle function
+//then copy that into a list,
+//vectors have random access so we can call shuffle, but lists can be treated like
+//a queue so we can pop off the top.
 void CardDeck::shuffle()
 {
 	//use the shuffle properties of a vector and then
 	//copy that into a list of cards.
-	cout << "club: " << Card::CLUB << " heart: " << Card::HEART << " spade: " << Card::SPADE << " diamond: " << Card::DIAMOND << endl;
+	//cout << "club: " << Card::CLUB << " heart: " << Card::HEART << " spade: " << Card::SPADE << " diamond: " << Card::DIAMOND << endl;
 	vector<Card> localCards;
 	int s = Card::CLUB;
 	for (; s <= Card::DIAMOND; s++)

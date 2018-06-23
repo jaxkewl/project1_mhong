@@ -9,6 +9,7 @@ Card::~Card()
 {
 }
 
+//get a string represenation of the card
 string Card::toString()
 {
 	string ret = valMap[getVal()];

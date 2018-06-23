@@ -4,22 +4,32 @@
 
 
 
-
-void GameDisplay::insertCoin()
+//call this function to prompt the player for the number of coins to play with
+bool GameDisplay::insertCoin()
 {
 	game.clearPlayerBet();
 	int coinsInserted = 0;
 	//cout << "Player's current coin count: " << getPlayerCoinBalance() << endl;
 	cout << "Insert how many coins?" << endl;
 	cin >> coinsInserted;
-
+	if (coinsInserted > game.player.getCointCount() ||
+		coinsInserted > 5 ||
+		coinsInserted < 1)
+	{
+		cout << "Insert 1 to 5 coins, ending game!" << endl;
+		return false;
+	}
 	for (int i = 0; i < coinsInserted; ++i)
 	{
 		game.insertCoin();
 	}
-
+	return true;
 }
 
+//after the cards have been dealt, ask player for their action.
+//they can either swap a card out or end the hand, they have a limit of 3 cards
+//they can swap out, plus they can not swap out a card that was already 
+//swapped out
 void GameDisplay::promptPlayerAction()
 {
 	int actionNum = 0;
@@ -32,7 +42,7 @@ void GameDisplay::promptPlayerAction()
 			endGame();
 			break;
 		}
-		cout << "Enter card number to hold or 6 to end" << endl;
+		cout << "Enter card number to switch or 6 to end" << endl;
 		cin >> actionNum;
 		if (!one && actionNum == 1)
 		{
@@ -75,6 +85,7 @@ void GameDisplay::promptPlayerAction()
 	}
 }
 
+//display the end game metrics
 void GameDisplay::endGame()
 {
 	int payout = getPayout();
@@ -86,6 +97,7 @@ void GameDisplay::endGame()
 
 }
 
+//display the players cards
 void GameDisplay::displayCards()
 {
 	list<Card> cards = game.player.getCards();
@@ -102,6 +114,7 @@ void GameDisplay::displayCards()
 	}
 }
 
+//determine the player's hand if they have any
 void GameDisplay::displayBestHand()
 {
 	string bestHand = findBestHand();
@@ -109,16 +122,19 @@ void GameDisplay::displayBestHand()
 	cout << "Payout " << getPayout() << endl;
 }
 
+//calculate the player's payout given the bet and the best hand of the player
 int GameDisplay::getPayout()
 {
 	return game.getWinMultiplier() * game.getPlayerBet();
 }
 
+//get a card from the game's deck of cards
 Card GameDisplay::getCard()
 {
 	return game.getCard();
 }
 
+//initialize a new game
 void GameDisplay::initGame()
 {
 	//insertCoin();
@@ -133,7 +149,7 @@ void GameDisplay::initGame()
 			cout << "Player has no more coins, thanks for playing" << endl;
 			break;
 		}
-		insertCoin();
+		if (!insertCoin()) break;
 		//displayGameInfo();
 		deal();
 		displayGameInfo();
@@ -143,18 +159,20 @@ void GameDisplay::initGame()
 
 }
 
+//get the players coin balance
 int GameDisplay::getPlayerCoinBalance()
 {
 	return game.player.getCointCount();
 }
 
+//deal new cards
 void GameDisplay::deal()
 {
 	game.deal();
 }
 
 
-
+//display the game's current information and state
 void GameDisplay::displayGameInfo()
 {
 	cout << "Player's coin balance:" << getPlayerCoinBalance() << endl;
@@ -164,16 +182,18 @@ void GameDisplay::displayGameInfo()
 	displayBestHand();
 }
 
+//default constructor
 GameDisplay::GameDisplay()
 {
 }
 
-
+//default destructor
 GameDisplay::~GameDisplay()
 {
 }
 
 
+//main entry point into the game
 void GameDisplay::startGame()
 {
 	cout << "Starting Video Poker Game" << endl;
@@ -181,6 +201,7 @@ void GameDisplay::startGame()
 
 }
 
+//convert the best hand to a string display
 string GameDisplay::findBestHand()
 {
 	return cardHandToStringMap[game.findBestHand()];
